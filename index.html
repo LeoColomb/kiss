@@ -1,9 +1,198 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Love</title>
+  <meta charset="utf-8">
+  <title>Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <style media="screen">
+    body {
+    	background: #f0f0f0;
+    	width: 100%;
+    	height: 100vh;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	align-content: center;
+      overflow: hidden;
+    }
+    button {
+    	position: relative;
+    	margin: 0;
+    	padding: 0;
+    	border: 0;
+    	background: none;
+    	overflow: visible;
+    }
+    button:hover,
+    button:focus {
+    	outline: none;
+    }
+    button .heart {
+    	display: block;
+    	width: 150px;
+    	height: 150px;
+    	fill: #f46767;
+      transform: scale(1);
+      transition: transform .2s ease-out;
+    }
+    button .heart:hover,
+    button .heart:focus {
+      transform: scale(1.1);
+    }
+    button svg {
+    	left: 0; /* fix for mo.js */
+    }
+  </style>
 </head>
-<body style="background: pink;">
-
+<body>
+  <button>
+    <svg class="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
+      <path d="m61.07 18.16c-6.395-16.918-27.15-9.328-29.07-.879-2.64-9-22.89-15.721-29.07.891-6.881 18.502 26.67 35.11 29.07 37.828 2.397-2.162 35.952-19.639 29.07-37.84"/>
+    </svg>
+  </button>
+  <script src="//cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
+  <script type="text/javascript">
+    (function(window) {
+      'use strict';
+      // from mo.js demos
+      function isIOSSafari() {
+        var userAgent;
+        userAgent = window.navigator.userAgent;
+        return userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
+      };
+      // from mo.js demos
+      function isTouch() {
+        var isIETouch;
+        isIETouch = navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        return [].indexOf.call(window, 'ontouchstart') >= 0 || isIETouch;
+      };
+      // from mo.js demos
+      var isIOS = isIOSSafari(),
+        clickHandler = isIOS || isTouch() ? 'touchstart' : 'click';
+      function extend(a, b) {
+        for(var key in b) {
+          if(b.hasOwnProperty(key)) {
+            a[key] = b[key];
+          }
+        }
+        return a;
+      }
+      function Animocon(el, options) {
+        this.el = el;
+        this.options = extend({}, this.options);
+        extend(this.options, options);
+        this.timeline = new mojs.Timeline();
+        for(var i = 0, len = this.options.tweens.length; i < len; ++i) {
+          this.timeline.add(this.options.tweens[i]);
+        }
+        var self = this;
+        this.el.addEventListener(clickHandler, function() {
+          self.timeline.start();
+        });
+      }
+      Animocon.prototype.options = {
+        tweens : [
+          new mojs.Burst({
+            shape : 'circle',
+            isRunLess: true
+          })
+        ],
+        onCheck : function() { return false; },
+      };
+      function init() {
+        var el8 = document.body.querySelector('button'), el8span = el8.querySelector('svg');
+        var scaleCurve8 = mojs.easing.path('M0,100 L25,99.9999983 C26.2328835,75.0708847 19.7847843,0 100,0');
+        new Animocon(el8, {
+          tweens: [
+            new mojs.Burst({
+              parent: el8,
+              duration: 1600,
+              shape : 'circle',
+              fill: '#f46767',
+              x: '50%',
+              y: '50%',
+              opacity: 0.6,
+              childOptions: { radius: {'rand(20,5)':0} },
+              radius: {100:220},
+              count: 28,
+              isSwirl: true,
+              swirlSize: 15,
+              isRunLess: true,
+              easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+            }),
+            new mojs.Burst({
+              parent: el8,
+              duration: 1800,
+              delay: 300,
+              shape : 'circle',
+              fill: '#f46767',
+              x: '50%',
+              y: '50%',
+              opacity: 0.6,
+              childOptions: {
+                radius: {'rand(20,5)':0},
+                type: 'line',
+                stroke: '#f46767',
+                strokeWidth: 2
+              },
+              angle: {0:10},
+              radius: {280:400},
+              count: 18,
+              isRunLess: true,
+              easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+            }),
+            new mojs.Burst({
+              parent: el8,
+              duration: 2000,
+              delay: 500,
+              shape : 'circle',
+              fill: '#f46767',
+              x: '50%',
+              y: '50%',
+              opacity: 0.6,
+              childOptions: { radius: {'rand(20,5)':0} },
+              radius: {80:160},
+              count: 18,
+              isSwirl: true,
+              swirlSize: 15,
+              isRunLess: true,
+              easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+            }),
+            new mojs.Burst({
+              parent: el8,
+              duration: 3000,
+              delay: 750,
+              shape : 'circle',
+              fill: '#f46767',
+              x: '50%',
+              y: '50%',
+              opacity: 0.6,
+              childOptions: {
+                radius: {'rand(20,10)':0}
+              },
+              angle: {0:-10},
+              radius: {180:260},
+              count: 20,
+              isRunLess: true,
+              easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+            }),
+            new mojs.Tween({
+              duration : 400,
+              easing: mojs.easing.back.out,
+              onUpdate: function(progress) {
+                var scaleProgress = scaleCurve8(progress);
+                el8span.style.WebkitTransform = el8span.style.transform = 'scale3d(' + progress + ',' + progress + ',1)';
+              }
+            })
+          ],
+          onCheck: function() {
+            el8.style.color = '#988ADE';
+          },
+        });
+      }
+      init();
+    })(window);
+  </script>
 </body>
 </html>
