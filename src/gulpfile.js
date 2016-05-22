@@ -39,12 +39,12 @@ gulp.task('css', function () {
 
 gulp.task('icon', function () {
     return gulp.src('logo.png').pipe(favicons({
-        appName: 'Bisous',
+        appName: 'Kiss',
         appDescription: 'Bisous à tout le monde !',
         developerName: 'Léo Colombaro',
         developerURL: 'http://colombaro.fr',
         background: '#f0f0f0',
-        url: 'http://bisous.colombaro.fr',
+        url: 'http://kiss.colombaro.fr',
         version: 1.0,
         logging: false,
         online: false
