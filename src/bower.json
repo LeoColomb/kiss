@@ -1,0 +1,15 @@
+{
+  "name": "kiss",
+  "version": "1.0.0",
+  "authors": [
+    "Léo Colombaro <git@colombaro.fr>"
+  ],
+  "description": "Bisous à tout le monde !",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "bisous.colombaro.fr",
+  "private": true,
+  "dependencies": {
+    "mojs": "legomushroom/mojs#master"
+  }
+}
