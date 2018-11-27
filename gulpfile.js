@@ -12,7 +12,7 @@ const livereload = require('gulp-livereload');
 const uglify = require('gulp-uglify');
 
 gulp.task('webserver', function () {
-  gulp.src('.')
+  gulp.src('src')
     .pipe(webserver({
       livereload: true,
       open: true
